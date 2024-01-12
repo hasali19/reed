@@ -83,7 +83,9 @@ async fn main() {
 
                 let mut decoder = GzDecoder::new(&*res_body);
                 let mut res_text = String::new();
-                decoder.read_to_string(&mut res_text).unwrap();
+                if decoder.read_to_string(&mut res_text).is_err() {
+                    println!("warning: decode failed");
+                }
 
                 if log_requests {
                     println!("got status {status:?}");
