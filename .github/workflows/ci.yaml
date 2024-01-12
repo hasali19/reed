@@ -4,6 +4,7 @@ on:
 
 permissions:
   checks: write
+  packages: write
 
 jobs:
   lint:
