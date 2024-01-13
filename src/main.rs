@@ -13,7 +13,7 @@ use tokio::net::TcpListener;
 
 #[tokio::main]
 async fn main() {
-    let log_requests = env::var("REED_PROXY_REQUESTS")
+    let log_requests = env::var("REED_LOG_REQUESTS")
         .map(|v| v == "true")
         .unwrap_or(false);
 
@@ -54,6 +54,8 @@ async fn main() {
                 if log_requests {
                     println!("proxying to {proxy_url}");
                     println!("{proxy_headers:?}");
+                    let body = String::from_utf8_lossy(&body);
+                    println!("{body}");
                 }
 
                 let res = client
